@@ -1,0 +1,24 @@
+✅ 2. Categories where every product has at least one purchase
+
+We need categories where NO product exists without a purchase.
+
+SELECT pc.id, pc.name
+FROM product_category pc
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM product_title pt
+    JOIN product p ON p.product_title_id = pt.id
+    WHERE pt.product_category_id = pc.id
+      AND NOT EXISTS (
+          SELECT 1
+          FROM order_details od
+          WHERE od.product_id = p.id
+      )
+)
+ORDER BY pc.id ASC;
+
+Logic:
+
+Outer NOT EXISTS → ensures no “bad” products exist
+Inner NOT EXISTS → finds products with zero purchases
+So overall: all products must have ≥1 purchase

@@ -1,0 +1,6 @@
+🔥 Root cause (confirmed from your INSERTs)
+
+From your product table:
+
+(8
+;

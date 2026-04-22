@@ -1,0 +1,27 @@
+For the following diagram, write the posthresql queries:
+1. Get cities, for which there are no streets, sorted ascending by name. Scheme of result data set: id | name
+
+2. Get a list of categories, where each product has at least one purchase. Sort ascending by id. Scheme of result data set: id| name
+
+
+3. Get list of products which price are higher than the average price of producs in this category. Sort ascendidng by product id. Scheme of result data set: id | title | price
+
+Nice schema — it’s clean and normalized, so the queries fall out pretty naturally once you think in terms of “absence” (NOT EXISTS) and group guarantees.
+
+✅ 1. Cities with no streets
+
+You want cities that don’t have any rows in street referencing them.
+
+SELECT c.id, c.name
+FROM city c
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM street s
+    WHERE s.city_id = c.id
+)
+ORDER BY c.name ASC;
+
+Why this works:
+
+NOT EXISTS is the safest way to check absence (better than LEFT JOIN + NULL in most cases)
+It avoids issues with duplicates or joins

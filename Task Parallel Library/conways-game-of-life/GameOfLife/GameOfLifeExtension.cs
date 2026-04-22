@@ -1,0 +1,99 @@
+namespace GameOfLife;
+
+/// <summary>
+/// Provides extension methods for simulating Conway's Game of Life on different versions.
+/// </summary>
+public static class GameOfLifeExtension
+{
+    /// <summary>
+    /// Simulates the evolution of Conway's Game of Life for a specified number of generations using the sequential version.
+    /// The result is written to the provided <see cref="TextWriter"/> using the specified characters for alive and dead cells.
+    /// </summary>
+    /// <param name="game">The sequential version of the Game of Life.</param>
+    /// <param name="generations">The number of generations to simulate.</param>
+    /// <param name="writer">The <see cref="TextWriter"/> used to output the simulation result.</param>
+    /// <param name="aliveCell">The character representing an alive cell.</param>
+    /// <param name="deadCell">The character representing a dead cell.</param>
+    /// <exception cref="ArgumentNullException">Thrown when <param name="game"/> parameters is null.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <param name="writer"/> parameters is null.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when <param name="generations"/> is less than or equal to 0.</exception>
+    public static void Simulate(this GameOfLifeSequentialVersion? game, int generations, TextWriter? writer, char aliveCell, char deadCell)
+    {
+        ArgumentNullException.ThrowIfNull(game);
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentOutOfRangeException.ThrowIfLessThan(generations, 1);
+
+        for (int i = 0; i < generations; i++)
+        {
+            PrintCurrentGeneration(game.CurrentGeneration, writer);
+            game.NextGeneration();
+        }
+
+        void PrintCurrentGeneration(bool[,] grid, TextWriter writer)
+        {
+            int rows = grid.GetLength(0);
+            int cols = grid.GetLength(1);
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    writer.Write(grid[i, j] ? aliveCell : deadCell);
+                }
+
+                writer.WriteLine();
+            }
+
+            writer.WriteLine();
+        }
+    }
+
+    /// <summary>
+    /// Asynchronously simulates the evolution of Conway's Game of Life for a specified number of generations using the parallel version.
+    /// The result is written to the provided TextWriter using the specified characters for alive and dead cells.
+    /// </summary>
+    /// <param name="game">The parallel version of the Game of Life.</param>
+    /// <param name="generations">The number of generations to simulate.</param>
+    /// <param name="writer">The <see cref="TextWriter"/> used to output the simulation result.</param>
+    /// <param name="aliveCell">The character representing an alive cell.</param>
+    /// <param name="deadCell">The character representing a dead cell.</param>
+    /// <returns>A Task representing the asynchronous operation.</returns>
+    /// <exception cref="ArgumentNullException">Thrown when <param name="game"/> parameters is null.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <param name="writer"/> parameters is null.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when <param name="generations"/> is less than or equal to 0.</exception>
+    public static Task SimulateAsync(this GameOfLifeParallelVersion? game, int generations, TextWriter? writer, char aliveCell, char deadCell)
+    {
+        ArgumentNullException.ThrowIfNull(game);
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentOutOfRangeException.ThrowIfLessThan(generations, 1);
+
+        return SimulateInternalAsync(game, generations, writer, aliveCell, deadCell);
+    }
+
+    private static async Task SimulateInternalAsync(GameOfLifeParallelVersion game, int generations, TextWriter writer, char aliveCell, char deadCell)
+    {
+        for (int g = 0; g < generations; g++)
+        {
+            var grid = game.CurrentGeneration;
+
+            int rows = grid.GetLength(0);
+            int cols = grid.GetLength(1);
+
+            for (int i = 0; i < rows; i++)
+            {
+                var line = new char[cols];
+
+                for (int j = 0; j < cols; j++)
+                {
+                    line[j] = grid[i, j] ? aliveCell : deadCell;
+                }
+
+                await writer.WriteLineAsync(new string(line));
+            }
+
+            await writer.WriteLineAsync();
+
+            game.NextGeneration();
+        }
+    }
+}
