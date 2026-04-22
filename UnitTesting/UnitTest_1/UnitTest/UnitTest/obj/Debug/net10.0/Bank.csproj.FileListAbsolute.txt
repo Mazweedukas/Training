@@ -1,0 +1,14 @@
+C:\Users\px\EPAM_Projects\UnitTesting\UnitTest_1\UnitTest\UnitTest\bin\Debug\net10.0\Bank.exe
+C:\Users\px\EPAM_Projects\UnitTesting\UnitTest_1\UnitTest\UnitTest\bin\Debug\net10.0\Bank.deps.json
+C:\Users\px\EPAM_Projects\UnitTesting\UnitTest_1\UnitTest\UnitTest\bin\Debug\net10.0\Bank.runtimeconfig.json
+C:\Users\px\EPAM_Projects\UnitTesting\UnitTest_1\UnitTest\UnitTest\bin\Debug\net10.0\Bank.dll
+C:\Users\px\EPAM_Projects\UnitTesting\UnitTest_1\UnitTest\UnitTest\bin\Debug\net10.0\Bank.pdb
+C:\Users\px\EPAM_Projects\UnitTesting\UnitTest_1\UnitTest\UnitTest\obj\Debug\net10.0\Bank.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\px\EPAM_Projects\UnitTesting\UnitTest_1\UnitTest\UnitTest\obj\Debug\net10.0\Bank.AssemblyInfoInputs.cache
+C:\Users\px\EPAM_Projects\UnitTesting\UnitTest_1\UnitTest\UnitTest\obj\Debug\net10.0\Bank.AssemblyInfo.cs
+C:\Users\px\EPAM_Projects\UnitTesting\UnitTest_1\UnitTest\UnitTest\obj\Debug\net10.0\Bank.csproj.CoreCompileInputs.cache
+C:\Users\px\EPAM_Projects\UnitTesting\UnitTest_1\UnitTest\UnitTest\obj\Debug\net10.0\Bank.dll
+C:\Users\px\EPAM_Projects\UnitTesting\UnitTest_1\UnitTest\UnitTest\obj\Debug\net10.0\refint\Bank.dll
+C:\Users\px\EPAM_Projects\UnitTesting\UnitTest_1\UnitTest\UnitTest\obj\Debug\net10.0\Bank.pdb
+C:\Users\px\EPAM_Projects\UnitTesting\UnitTest_1\UnitTest\UnitTest\obj\Debug\net10.0\Bank.genruntimeconfig.cache
+C:\Users\px\EPAM_Projects\UnitTesting\UnitTest_1\UnitTest\UnitTest\obj\Debug\net10.0\ref\Bank.dll
